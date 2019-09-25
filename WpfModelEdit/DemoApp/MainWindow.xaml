@@ -1,0 +1,48 @@
+﻿<Window x:Class="DemoApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DemoApp"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800"
+        MinWidth="392"
+        MinHeight="180">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition MaxHeight="72"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Grid.Row="0" Grid.Column="0" FontSize="24px" Margin="12">Cd-Sammlung</TextBlock>
+
+        <ListView Name="lbxCds" Grid.Row="1" Grid.Column="0">
+            <ListView.View>
+                <GridView>
+                    <GridView.Columns>
+                        <GridViewColumn Header="Cd-Title" DisplayMemberBinding="{Binding Path=AlbumTitle}"></GridViewColumn>
+                        <GridViewColumn Header="Artist" DisplayMemberBinding="{Binding Path=Artist}"></GridViewColumn>
+                    </GridView.Columns>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <Grid Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="btnNew" Grid.Column="0" Grid.Row="0" Margin="12">Neu</Button>
+            <Button Name="btnDelete" Grid.Column="1" Grid.Row="0" Margin="12">Loeschen</Button>
+            <Button Name="btnTracks" Grid.Column="2" Grid.Row="0" Margin="12">Tracks bearbeiten</Button>
+        </Grid>
+    </Grid>
+</Window>
