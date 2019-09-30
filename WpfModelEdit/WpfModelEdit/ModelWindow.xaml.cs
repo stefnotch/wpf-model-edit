@@ -141,7 +141,23 @@ namespace WpfModelEdit
 
         private string GetName(PropertyInfo propertyInfo)
         {
-            return _textSplitterRegex.Replace(propertyInfo.Name, "$1 ");
+            string name = propertyInfo.GetCustomAttributes<System.ComponentModel.DisplayNameAttribute>().FirstOrDefault()?.DisplayName;
+
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                var displayAttribute = propertyInfo.GetCustomAttributes().FirstOrDefault(a => a.GetType().Name == "DisplayAttribute");
+                if (displayAttribute != null)
+                {
+                    name = displayAttribute.GetType().GetProperty("Name")?.GetValue(displayAttribute) as string;
+                }
+            }
+
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                name = _textSplitterRegex.Replace(propertyInfo.Name, "$1 ");
+            }
+
+            return name;
         }
 
         private void BtnCancel_Click(object sender, RoutedEventArgs e)

@@ -62,6 +62,7 @@ namespace DemoApp
                 () => new Cd(),
                 (cd) => _cds.Add((Cd)cd)
             );
+            addCdWindow.DisplayText = "Add/Create a new CD";
             addCdWindow.ShowDialog();
             LoadCds();
         }
