@@ -2,17 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace WpfModelEdit
 {
@@ -64,7 +56,7 @@ namespace WpfModelEdit
 
         private PropertyInfoBinding[] _objectProperties;
 
-        private Regex _textSplitterRegex = new Regex("([A-Z]+(?=$|[A-Z][a-z]|[0-9])|[A-Z]?[a-z]+|[0-9]+)", RegexOptions.Compiled);
+        private readonly Regex _textSplitterRegex = new Regex("([A-Z]+(?=$|[A-Z][a-z]|[0-9])|[A-Z]?[a-z]+|[0-9]+)", RegexOptions.Compiled);
 
         private void AddCdWindow_Loaded(object sender, RoutedEventArgs e)
         {
