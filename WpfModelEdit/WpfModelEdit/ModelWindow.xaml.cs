@@ -70,7 +70,7 @@ namespace WpfModelEdit
                 var label = new TextBlock()
                 {
                     VerticalAlignment = VerticalAlignment.Center,
-                    Margin = new Thickness(12),
+                    Margin = new Thickness(6),
                     FontSize = 16,
                     Text = DisplayText
                 };
@@ -80,17 +80,31 @@ namespace WpfModelEdit
                 Grid.SetColumnSpan(label, 2);
             }
 
-            var propertyInfos = ObjectType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
-            _objectProperties = new PropertyInfoBinding[propertyInfos.Length];
+            var propertyInfos = ObjectType
+                .GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                .Where(p =>
+                {
+                    var browsableAttribute = p.GetCustomAttribute<System.ComponentModel.BrowsableAttribute>();
+                    if (browsableAttribute == null)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return browsableAttribute.Browsable;
+                    }
+                })
+                .ToList();
+            _objectProperties = new PropertyInfoBinding[propertyInfos.Count];
 
-            for (int i = 0; i < propertyInfos.Length; i++)
+            for (int i = 0; i < propertyInfos.Count; i++)
             {
                 ModelGrid.RowDefinitions.Add(new RowDefinition());
 
                 var label = new TextBlock()
                 {
                     VerticalAlignment = VerticalAlignment.Center,
-                    Margin = new Thickness(12),
+                    Margin = new Thickness(6),
                     Text = GetName(propertyInfos[i])
                 };
                 ModelGrid.Children.Add(label);
@@ -104,7 +118,7 @@ namespace WpfModelEdit
                     textBox = new TextBox()
                     {
                         VerticalAlignment = VerticalAlignment.Center,
-                        Margin = new Thickness(12)
+                        Margin = new Thickness(6)
                     };
                     ModelGrid.Children.Add(textBox);
                     Grid.SetRow(textBox, ModelGrid.RowDefinitions.Count - 1);
@@ -133,7 +147,7 @@ namespace WpfModelEdit
 
         private string GetName(PropertyInfo propertyInfo)
         {
-            string name = propertyInfo.GetCustomAttributes<System.ComponentModel.DisplayNameAttribute>().FirstOrDefault()?.DisplayName;
+            string name = propertyInfo.GetCustomAttribute<System.ComponentModel.DisplayNameAttribute>()?.DisplayName;
 
             if (string.IsNullOrWhiteSpace(name))
             {

@@ -14,6 +14,9 @@ namespace DemoApp
         [DisplayName("The album title")]
         public string AlbumTitle { get; set; }
 
+        [Browsable(false)]
+        public string HiddenProperty { get; set; }
+
         public List<Track> Tracks { get; set; }
 
         public Cd()

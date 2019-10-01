@@ -8,7 +8,7 @@
     <Authors>Stefnotch</Authors>
     <Description>Automatically creates WPF windows to edit model classes</Description>
     <Company>n/a</Company>
-    <Version>1.0.2</Version>
+    <Version>1.0.3</Version>
     <RepositoryUrl>https://github.com/stefnotch/wpf-model-edit</RepositoryUrl>
     <PackageIconUrl>https://raw.githubusercontent.com/stefnotch/wpf-model-edit/master/Icon.png</PackageIconUrl>
     <PackageTags>WPF</PackageTags>
